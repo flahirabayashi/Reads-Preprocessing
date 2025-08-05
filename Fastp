@@ -1,0 +1,30 @@
+#!/bin/bash
+# Fastp com merge de reads
+
+# Arquivos de entrada (FASTQ brutos)
+R1="Y6724_S3_L001_R1_001.fastq"
+R2="Y6724_S3_L001_R2_001.fastq"
+
+# Arquivos de saída
+MERGED="Y6724_merged.fq.gz"
+UNPAIRED1="Y6724_unmerged_R1.fq.gz"
+UNPAIRED2="Y6724_unmerged_R2.fq.gz"
+REPORT_HTML="Y6724_fastp_report.html"
+REPORT_JSON="Y6724_fastp_report.json"
+
+# Threads
+THREADS=16
+
+# Execução do fastp
+echo "Rodando fastp para merge dos arquivos $R1 e $R2..."
+
+fastp \
+  -i "$R1" \
+  -I "$R2" \
+  --merged_out "$MERGED" \
+  --unpaired1 "$UNPAIRED1" \
+  --unpaired2 "$UNPAIRED2" \
+  -h "$REPORT_HTML" \
+  -j "$REPORT_JSON" \
+  -w "$THREADS" \
+  -m
