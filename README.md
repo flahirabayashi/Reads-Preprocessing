@@ -1,4 +1,4 @@
-# Read Trimming and Filtering with Fastp
+# Reads Preprocessing with Fastp
 
 A fast, efficient, and user-friendly tool for NGS read preprocessing, combining QC, trimming, and filtering in few steps.
 
