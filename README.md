@@ -1,8 +1,7 @@
 # Read-Trimming-and-Filtering
 A fast, efficient, and user-friendly tool for NGS read preprocessing, combining QC, trimming, and filtering in few steps.
 
-How to Run fastp in a Conda Environment
-How to set up a Conda environment with fastp and run it using a shell script (run_fastp.sh)
+How to Run fastp in a Conda Environment using a shell script (run_fastp.sh)
 
 Prerequisites
     Conda installed (Miniconda or Anaconda).
