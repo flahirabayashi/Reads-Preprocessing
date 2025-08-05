@@ -1,20 +1,24 @@
-# Read-Trimming-and-Filtering
+# Read Trimming and Filtering with fastp
+
 A fast, efficient, and user-friendly tool for NGS read preprocessing, combining QC, trimming, and filtering in few steps.
 
-How to Run fastp in a Conda Environment using a shell script (run_fastp.sh)
+## How to Run fastp in a Conda Environment
 
-Prerequisites
-    Conda installed (Miniconda or Anaconda).
-    fastp installed in a Conda environment.
+This guide explains how to run fastp using a shell script (`run_fastp.sh`).
 
-Step 1: Create and Activate the Conda Environment (if needed).
+### Prerequisites
+- Conda installed ([Miniconda](https://docs.conda.io/en/latest/miniconda.html) or Anaconda)
+- fastp installed in a Conda environment
 
-    conda create -n fastp -c bioconda fastp
-    
-Step 2: Prepare the run_fastp.sh Script
-Step 3: Make the Script Executable and Run It
+### Step 1: Create and activate the conda environment
+```bash
+conda create -n fastp -c bioconda fastp
+conda activate fastp
+```
+### Step 2: Prepare the (`run_fastp.sh`) script and adapt it
+### Step 3: Make the script executable and run it
 
     chmod +x run_fastp.sh
     ./run_fastp.sh
     
-Expected Output: merged and umerged files, report.json and report.html  
+### Expected output: merged and umerged files, report.json and report.html
