@@ -1,30 +1,34 @@
 #!/bin/bash
-# Fastp com merge de reads
+
+# Fastp para trimmagem de reads pareadas
 
 # Arquivos de entrada (FASTQ brutos)
 R1="Y6724_S3_L001_R1_001.fastq"
 R2="Y6724_S3_L001_R2_001.fastq"
 
-# Arquivos de saída
-MERGED="Y6724_merged.fq.gz"
-UNPAIRED1="Y6724_unmerged_R1.fq.gz"
-UNPAIRED2="Y6724_unmerged_R2.fq.gz"
-REPORT_HTML="Y6724_fastp_report.html"
-REPORT_JSON="Y6724_fastp_report.json"
+# Arquivos de saída (reads tratadas e pareadas)
+OUT_R1="Y6724_trimmed_R1.fq.gz"
+OUT_R2="Y6724_trimmed_R2.fq.gz"
+REPORT_HTML="Y6724_fastp_trim_report.html"
+REPORT_JSON="Y6724_fastp_trim_report.json"
 
 # Threads
 THREADS=16
 
 # Execução do fastp
-echo "Rodando fastp para merge dos arquivos $R1 e $R2..."
+echo "Rodando fastp para trimmagem dos arquivos $R1 e $R2..."
 
 fastp \
   -i "$R1" \
   -I "$R2" \
-  --merged_out "$MERGED" \
-  --unpaired1 "$UNPAIRED1" \
-  --unpaired2 "$UNPAIRED2" \
+  -o "$OUT_R1" \
+  -O "$OUT_R2" \
+  --detect_adapter_for_pe \
+  --correction \
+  --qualified_quality_phred 20 \
+  --low_complexity_filter \
   -h "$REPORT_HTML" \
   -j "$REPORT_JSON" \
-  -w "$THREADS" \
-  -m
+  -w "$THREADS"
+
+echo "Trimmagem finalizada. Saídas: $OUT_R1 e $OUT_R2"
