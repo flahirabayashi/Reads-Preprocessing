@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Fastp para trimmagem de reads pareadas
 
 # Arquivos de entrada (FASTQ brutos)
