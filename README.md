@@ -1,6 +1,6 @@
 # Read Preprocessing Pipeline
 
-This pipeline is designed to process Next-Generation Sequencing (NGS) reads by combining Fastp, FastQC, and MultiQC into a Python script. The goal is to streamline quality control, trimming, and filtering, and to generate comprehensive reports.
+This pipeline is designed to process reads by combining Fastp, FastQC, and MultiQC into a Python script. The goal is to streamline quality control, trimming, and filtering, and to generate comprehensive reports.
 
 ## How to Run the Pipeline
 
