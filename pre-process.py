@@ -3,10 +3,9 @@ import subprocess
 import argparse
 
 def run_fastp(r1, r2, out_dir, threads=16):
-    print(f"Rodando fastp para trimmagem dos arquivos {r1} e {r2}...")
+    print(f"Running FastP for {r1} e {r2}...")
 
     prefix = os.path.basename(r1).replace("_R1_001.fastq", "").replace("_R1.fq.gz", "").replace("_R1.fastq", "")
-    print(f"Prefixo do arquivo: {prefix}")
     
     r1_out = os.path.join(out_dir, f"{prefix}_trimmed_R1.fq.gz")
     r2_out = os.path.join(out_dir, f"{prefix}_trimmed_R2.fq.gz")
@@ -28,15 +27,15 @@ def run_fastp(r1, r2, out_dir, threads=16):
         "-w", str(threads)
     ]
     
-    print(f"Comando a ser executado: {' '.join(cmd)}")
+    print(f"Executing: {' '.join(cmd)}")
     subprocess.run(cmd, check=True)
 
-    print(f"Trimmagem finalizada. Saídas: {r1_out} e {r2_out}")
+    print(f"Done Trimming! Outs: {r1_out} e {r2_out}")
     return r1_out, r2_out
 
 
 def run_fastqc(r1_trimmed, r2_trimmed, out_dir, threads=4):
-    print("Rodando FastQC nos arquivos trimmados...")
+    print("Running FastQC...")
     cmd = [
         "fastqc",
         r1_trimmed,
@@ -45,32 +44,32 @@ def run_fastqc(r1_trimmed, r2_trimmed, out_dir, threads=4):
         "-t", str(threads)
     ]
     
-    print(f"Comando a ser executado: {' '.join(cmd)}")
+    print(f"Executing: {' '.join(cmd)}")
     subprocess.run(cmd, check=True)
 
-    print("Análise de qualidade com FastQC finalizada.")
+    print("FastQC Analysis Done!")
 
 
 def run_multiqc(out_dir):
-    print("Rodando MultiQC no diretório de saída...")
+    print("Running MultiQC...")
     cmd = [
         "multiqc",
         out_dir,
         "-o", out_dir
     ]
     
-    print(f"Comando a ser executado: {' '.join(cmd)}")
+    print(f"Executing: {' '.join(cmd)}")
     subprocess.run(cmd, check=True)
 
-    print(f"Relatório do MultiQC gerado em: {os.path.join(out_dir, 'multiqc_report.html')}")
+    print(f"MultiQC Report on: {os.path.join(out_dir, 'multiqc_report.html')}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Pipeline de pré-processamento de reads")
-    parser.add_argument("-r1", "--read1", required=True, help="Arquivo de reads forward (R1)")
-    parser.add_argument("-r2", "--read2", required=True, help="Arquivo de reads reverse (R2)")
-    parser.add_argument("-o", "--output", required=True, help="Diretório de saída")
-    parser.add_argument("-t", "--threads", default=16, type=int, help="Número de threads (padrão: 16)")
+    parser = argparse.ArgumentParser(description="Read PreProcessing Pipeline")
+    parser.add_argument("-r1", "--read1", required=True, help="Forward Reads (R1)")
+    parser.add_argument("-r2", "--read2", required=True, help="Reverse Reads (R2)")
+    parser.add_argument("-o", "--output", required=True, help="Output Directory")
+    parser.add_argument("-t", "--threads", default=16, type=int, help="Thread Number (default: 16)")
     
     args = parser.parse_args()
     os.makedirs(args.output, exist_ok=True)
@@ -79,8 +78,8 @@ def main():
     run_fastqc(r1_trimmed, r2_trimmed, args.output, args.threads)
     run_multiqc(args.output)
 
-    print("Pipeline finalizado com sucesso!")
-    print(f"Os arquivos processados estão em: {args.output}")
+    print("Pipeline Finished!")
+    print(f"Output on: {args.output}")
 
 
 if __name__ == "__main__":
